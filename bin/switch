@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+# switch between source and header files in the same directory
+
+extract_absname() {
+	local dir=`dirname $1`
+  	local name=`basename $1 | cut -d '.' -f1`
+
+	echo "${dir}/${name}"
+}
+
+FILE=$(9p read acme/$winid/tag | awk '{print $1}')
+
+case $FILE in
+	*".h"|*".hpp"* )
+	hname=$(extract_absname $FILE)
+	if [ -f "$hname.cpp" ]; then
+		plumb -d edit "$hname.cpp" 
+	elif [ -f "$hname.c" ]; then
+		plumb -d edit "$hname.c"
+	elif [  -f "$hname.cc" ]; then
+		plumb -d edit "$hname.cc"
+	else
+		echo "No corresponding source file"  | 9p write acme/$winid/errors 		
+	fi
+	;;
+	*".cpp"|*".c"|*".cc"* )
+	cppname=$(extract_absname $FILE)
+	if [ -f "$cppname.h" ]; then
+		plumb -d edit "$cppname.h" 
+	elif [ -f  "$cppname.hpp" ]; then
+		plumb -d edit "$cppname.hpp"
+	else
+		echo "No corresponding header file" | 9p write acme/$winid/errors	
+	fi 
+	;;
+esac
