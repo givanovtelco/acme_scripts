@@ -1,0 +1,21 @@
+#!/bin/bash
+
+export SHELL="/bin/bash"
+export acmeshell="/bin/bash"
+export BROWSER=chromium-browser
+export tabstop=4
+export TERM=dumb
+export PAGER=nobs
+
+custom_rules="$HOME/lib/plumbing"
+
+if [ "$(pgrep plumber)" ]; then
+        echo plumber is running
+else
+	echo starting plumber
+        plumber
+fi
+
+cat "$custom_rules" "$PLAN9/plumb/basic" | 9p write plumb/rules
+
+acme -a -f /mnt/font/Inconsolata/14a/font $1
