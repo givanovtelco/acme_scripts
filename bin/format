@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo -n "1,$" | 9p write acme/$winid/addr
+echo "Selected whole contents for overwriting with 'write'"
+9p read acme/$winid/body | clang-format-6.0 -style=file | 9p write acme/$winid/data
+
+
