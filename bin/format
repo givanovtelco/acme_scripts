@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 echo -n "1,$" | 9p write acme/$winid/addr
 echo "Selected whole contents for overwriting with 'write'"
