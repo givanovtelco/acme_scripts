@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+FILE=$(9p read acme/$winid/tag | awk '{print $1}')
+ARGS=""
+if [ ! -z "$1" ]; then
+	ARGS+="--grep=$1"
+fi
+
+git log $ARGS $FILE
