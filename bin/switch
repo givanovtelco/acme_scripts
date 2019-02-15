@@ -9,7 +9,7 @@ extract_absname() {
 	echo "${dir}/${name}"
 }
 
-FILE=$(9p read acme/$winid/tag | awk '{print $1}')
+FILE=$samfile
 
 case $FILE in
 	*".h"|*".hpp"* )
