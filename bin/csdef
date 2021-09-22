@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# print tag in a different windows
+echo "addr=dot" |  9p write acme/$winid/ctl
+TAG=$(9p read acme/$winid/xdata)
+gtags-cscope -L1 $TAG | awk '{print $1":"$3 $0}'

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 # print tag in a different windows
-TAGFILE=~/xref/tags
 echo "addr=dot" |  9p write acme/$winid/ctl
 TAG=$(9p read acme/$winid/xdata)
-ureadtags -t $TAGFILE $TAG | awk -F"\t" '{print $2":"$3}'
+global -ax $TAG | awk '{print $3":"$2}'

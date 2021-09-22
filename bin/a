@@ -1,8 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-export SHELL="/bin/bash"
-export acmeshell="/bin/bash"
-export BROWSER=chromium-browser
+export SHELL="rc"
+export acmeshell="rc"
+export BROWSER=firefox
 export tabstop=4
 export TERM=dumb
 export PAGER=nobs
@@ -18,4 +18,4 @@ fi
 
 cat "$custom_rules" "$PLAN9/plumb/basic" | 9p write plumb/rules
 
-acme -a -f /mnt/font/Inconsolata/14a/font $1
+acme -a -f /mnt/font/GoMono-Bold/12a/font $1
